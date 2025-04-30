@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comida Ucraniana</title>
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="cabecalho">
+    <h1>Comidas Ucranianas <br> Смачний <span class="traducao"></span></h1>
+  </header>  
+  <div id="app">
+    
+    <!-- Tela 1: Cardápio -->
+    <section id="cardapio" class="tela ativa">
+      <h2> CARDÁPIO</h2>
+      <div class="itens">
+        <div class="item" data-id="0">
+          <img src="imagens/pirrorre.jpeg" alt="Pêrorrê" />
+          <p class="nome-comida">Varenyky (Pêrorrê)</p>
+          <div class="quantidade">
+            <button class="menos">-</button><span>0</span><button class="mais">+</button>
+          </div>
+        </div>
+        <div class="item" data-id="1">
+          <img src="imagens/borcht.jpeg" alt="Borscht" />
+          <p class="nome-comida">Borscht (Sopa de Beterraba)</p>
+          <div class="quantidade">
+            <button class="menos">-</button><span>0</span><button class="mais">+</button>
+          </div>
+        </div>
+        <div class="item" data-id="2">
+          <img src="imagens/deruny.jpg" alt="Deruny" />
+          <p class="nome-comida">Deruny (Panqueca de Batata)</p>
+          <div class="quantidade">
+            <button class="menos">-</button><span>0</span><button class="mais">+</button>
+          </div>
+        </div>
+        <div class="item" data-id="3">
+          <img src="imagens/rolobtsi.webp" alt="Holubtsi" />
+          <p class="nome-comida">Holubtsi (Charuto de Repolho)</p>
+          <div class="quantidade">
+            <button class="menos">-</button><span>0</span><button class="mais">+</button>
+          </div>
+        </div>
+        <div class="item" data-id="4">
+          <img src="imagens/pampushka.jpg" alt="Pampushky" />
+          <p class="nome-comida">Pampushky (Pão de Alho)</p>
+          <div class="quantidade">
+            <button class="menos">-</button><span>0</span><button class="mais">+</button>
+          </div>
+        </div>
+        <div class="item" data-id="5">
+          <img src="imagens/banosh.jpeg" alt="Banosh" />
+          <p class="nome-comida">Banosh (Creme de Milho com Queijo)</p>
+          <div class="quantidade">
+            <button class="menos">-</button><span>0</span><button class="mais">+</button>
+          </div>
+        </div>
+        <div class="item" data-id="6">
+          <img src="imagens/kubaça.jpeg" alt="Kovbasa" />
+          <p class="nome-comida">Kovbasa (Linguiça Ucraniana)</p>
+          <div class="quantidade">
+            <button class="menos">-</button><span>0</span><button class="mais">+</button>
+          </div>
+        </div>
+        <div class="item" data-id="7">
+          <img src="imagens/medovik.webp" alt="Medivnyk" />
+          <p class="nome-comida">Medivnyk (Bolo de Mel)</p>
+          <div class="quantidade">
+            <button class="menos">-</button><span>0</span><button class="mais">+</button>
+          </div>
+        </div>
+      </div>      
+      <button onclick="proximaTela('resumo')">Próximo</button>
+    </section>
+
+    <!-- Tela 2: Resumo -->
+    <section id="resumo" class="tela">
+      <h2>Resumo do Pedido</h2>
+      <div id="resumoItens"></div>
+      <button onclick="voltarTela('cardapio')">Voltar</button>
+      <button onclick="proximaTela('pagamento')">Próximo</button>
+    </section>
+
+    <!-- Tela 3: Pagamento -->
+    <section id="pagamento" class="tela">
+      <h2>Forma de Pagamento</h2>
+      <input type="text" id="pix" placeholder="PIX" />
+      <input type="text" id="nome" placeholder="Nome" />
+      <input type="text" id="nascimento" placeholder="Data de Nascimento (dd/mm/aaaa)" />
+      <input type="text" id="cpf" placeholder="CPF" />
+      <button onclick="voltarTela('resumo')">Voltar</button>
+      <button onclick="finalizarCompra()">Feito</button>
+    </section>
+
+    <!-- Tela 4: Sucesso -->
+    <section id="sucesso" class="tela">
+      <h2>COMPRA COM SUCESSO NO СМАЧНИЙ</h2>
+      <canvas id="confete"></canvas>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
