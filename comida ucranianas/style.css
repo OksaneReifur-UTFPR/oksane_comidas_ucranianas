@@ -1,141 +1,238 @@
+/* Garante que o padding e border não ultrapassem o tamanho definido do elemento */
 * {
-    box-sizing: border-box;
-  }
-  
-  body {
-    margin: 0;
-    padding: 3;
-    font-family: sans-serif;
-    font-size: 1rem;
-    background: linear-gradient(to bottom, #0f72db 65%, #ffd700 1%);
-    color: #15171b;
-    min-height: 300vh;
-    background-attachment: fixed;
-  }
-  
-  #app {
-    width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 2vh 2vw;
-    background: rgba(160, 206, 212, 0.95);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    border-radius: 1rem;
-  }
-  
-  h1, h2 {
-    font-family: 'UnifrakturMaguntia', cursive;
-    text-align: center;
-    color: #06376e;
-  }
-  
-  .tela {
-    display: none;
-  }
-  
-  .ativa {
-    display: block;
-  }
-  
-  .itens {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-  
+  box-sizing: border-box;
+}
+
+/* Estilos globais do corpo da página */
+body {
+  margin: 0;
+  padding: 3px; /* Corrigido com unidade */
+  font-family: sans-serif;
+  font-size: 1rem;
+  background: linear-gradient(to bottom, #0f72db 20%, #ffd700 100%); /* Corrigido para transição suave */
+  color: #15171b;
+  min-height: 300vh; /* Mantém uma altura grande para testes visuais */
+  background-attachment: fixed; /* Fixa o fundo ao rolar a página */
+}
+
+/* Container principal da aplicação */
+#app {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2vh 2vw;
+  background: rgba(160, 206, 212, 0.95);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  border-radius: 1rem;
+}
+
+/* Títulos principais com fonte decorativa */
+h1, h2 {
+  font-family: 'UnifrakturMaguntia', cursive;
+  text-align: center;
+  color: #06376e;
+}
+
+/* Tela oculta por padrão */
+.tela {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease; /* Adiciona transição suave ao mudar telas */
+}
+
+/* Tela ativa visível com opacidade */
+.ativa {
+  display: block;
+  opacity: 1;
+}
+
+/* Container de itens em grid flexível */
+.itens {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Estilização dos cards de cada item */
+.item {
+  flex: 1 1 calc(25% - 1rem); /* 4 por linha com espaçamento */
+  max-width: calc(25% - 1rem);
+  min-width: 140px;
+  background: white;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Responsividade dos cards para tablets */
+@media (max-width: 768px) {
   .item {
-    width: 40%;
-    min-width: 140px;
-    background: rgb(221, 183, 56);
-    border-radius: 10px;
-    padding: 1rem;
-    box-shadow: 0 0 5px rgba(245, 242, 242, 0.2);
-    text-align: center;
+    flex: 1 1 calc(50% - 1rem);
+    max-width: calc(50% - 1rem);
   }
-  
-  .item img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
+}
+
+/* Responsividade dos cards para celulares */
+@media (max-width: 480px) {
+  .item {
+    flex: 1 1 100%;
+    max-width: 100%;
   }
-  
-  .quantidade {
-    margin-top: 0.5rem;
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-  }
-  
-  button {
-    background: #0155a8;
-    color: white;
-    padding: 0.6rem 1.2rem;
-    margin: 1rem 0.5rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background: #65a5e9;
-  }
-  
-  input {
-    width: 100%;
-    max-width: 400px;
-    margin: 0.5rem auto;
-    padding: 0.8rem;
-    display: block;
-    border-radius: 20px;
-    border: 1px solid #aaa;
-  }
-  
-  #confete {
+}
+
+/* Imagens dos itens */
+.item img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* Container dos botões de quantidade */
+.quantidade {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Botões gerais */
+button {
+  background: #0155a8;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  margin: 1rem 0.5rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+/* Efeito ao passar o mouse nos botões */
+button:hover {
+  background: #65a5e9;
+}
+
+/* Botões dentro da área de quantidade com estilo circular */
+.quantidade button {
+  width: 2rem;
+  height: 2rem;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  padding: 0;
+}
+
+/* Estilo especial para o botão de finalizar pedido */
+button.finalizar {
+  background-color: #28a745; /* verde */
+}
+
+button.finalizar:hover {
+  background-color: #218838;
+}
+
+/* Campo de entrada (como nome ou endereço) */
+input {
+  width: 100%;
+  max-width: 400px;
+  margin: 0.5rem auto;
+  padding: 0.8rem;
+  display: block;
+  border-radius: 20px;
+  border: 1px solid #aaa;
+}
+
+/* Contêiner onde os emojis de confete serão animados */
+#confete {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+
+/* Cabeçalho fixo com cor temática e fonte decorativa */
+.cabecalho {
+  background-color: #7eb4eb;
+  color: hsl(51%, 80%, 56%);
+  text-align: center;
+  padding: 1rem;
+  font-family: 'UnifrakturMaguntia', cursive;
+  box-shadow: 0 30px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Título dentro do cabeçalho */
+.cabecalho h1 {
+  font-size: 3.5rem;
+  margin: 0;
+}
+
+/* Tradução do título (exibida embaixo) */
+.cabecalho .traducao {
+  display: block;
+  font-size: 1.2rem;
+  font-family: sans-serif;
+  color: #ffffff;
+  margin-top: 0.3rem;
+}
+
+/* Nome do prato em ucraniano */
+.nome-comida {
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: 1.1rem;
+  text-align: center;
+  color: #5a2a00;
+  margin-top: 0.3rem;
+  line-height: 1.3;
+}
+
+/* Tradução do nome do prato */
+.nome-comida .traducao {
+  display: block;
+  font-size: 0.85rem;
+  font-style: italic;
+  font-family: sans-serif;
+  color: #333;
+  margin-top: 0.2rem;
+}
+
+/* Emoji de confete que cai com animação personalizada */
+.confete-emoji {
+  position: fixed;
+  top: 0;/* Emoji de confete que cai com animação personalizada */
+  .confete-emoji {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    font-size: 2rem;
+    z-index: 9999;
     pointer-events: none;
-  }
-  .item {
-    flex: 1 1 calc(25% - 1rem); /* 4 por linha com espaçamento */
-    max-width: calc(25% - 1rem);
-    min-width: 140px;
-    background: white;
-    border-radius: 10px;
-    padding: 1rem;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-    text-align: center;
-  }
-  .cabecalho {
-    background-color: #7eb4eb;
-    color: hsl(51%, 80%, 56%);
-    text-align: center;
-    padding: 1rem;
-    font-family: 'UnifrakturMaguntia', cursive;
-    box-shadow: 0 30px 30px rgba(0, 0, 0, 0.3);
+    animation: cair var(--duracao, 2s) linear forwards; /* Tempo individual com variação */
+    left: var(--posicaoX, 50vw); /* Posição horizontal variável */
+    transform: rotate(var(--rotacaoInicial, 0deg)); /* Rotação inicial opcional */
   }
   
-  .cabecalho h1 {
-    font-size: 3.5rem;
-    margin: 0;
+  /* Animação para cair até o fundo da tela, girando e sumindo */
+  @keyframes cair {
+    to {
+      transform: translateY(100vh) rotate(360deg); /* Queda + rotação */
+      opacity: 0;
+    }
   }
   
-  .cabecalho .traducao {
-    display: block;
-    font-size: 1.2rem;
-    font-family: sans-serif;
-    color: #ffffff;
-    margin-top: 0.3rem;
+  font-size: 2rem;
+  z-index: 9999;
+  pointer-events: none;
+  animation: cair var(--duracao, 2s) linear forwards; /* Tempo individual com variação */
+  left: var(--posicaoX, 50vw); /* Posição horizontal variável */
+  transform: rotate(var(--rotacaoInicial, 0deg)); /* Rotação inicial opcional */
+}
+
+/* Animação para cair até o fundo da tela, girando e sumindo */
+@keyframes cair {
+  to {
+    transform: translateY(100vh) rotate(360deg); /* Queda + rotação */
+    opacity: 0;
   }
-  .nome-comida {
-    font-family: 'UnifrakturMaguntia', cursive;
-    font-size: 1.1rem;
-    text-align: center;
-    color: #5a2a00;
-    margin-top: 0.3rem;
-  }
-  
+}
